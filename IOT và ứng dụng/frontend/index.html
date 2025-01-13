@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Hệ thống quản lý bể cá tự động</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+    <body style="margin: 0; padding:0;">
+        <div class="container-fluid text-center text-light h1 py-5 m-0 bg-dark fw-bolder">
+            HỆ THỐNG QUẢN LÝ BỂ CÁ TỰ ĐỘNG  
+        </div>
+        
+        <header>
+            <!-- place navbar here -->
+        </header>
+        <main class="d-flex flex-nowrap">
+            <!-- Sidebar -->
+            <div class="d-flex flex-column flex-shrink-0 p-3 my-0 text-bg-primary fixed-start" style="width: 15%; height: 100%;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                  <span class="fs-4 fw-bold">NHÓM 16</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link active" aria-current="page">
+                      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+                      Trang chủ
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link text-white">
+                      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                      Các thông số
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link text-white">
+                      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                      Điều khiển
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link text-white">
+                      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                      Giới thiệu
+                    </a>
+                  </li>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>mdo</strong>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+                </div>
+              </div>
+            <div class="container-md pt-5">
+                <div class="row text-center p-0 mx-0">
+                    <div class="col-md-6 border border-dark align-items-center">
+                        <p class="h3">Nhiệt độ: <span id="temperature">Loading...</span></p>
+                        <div class="container">
+                            <!-- <img src="https://www.jaspersoft.com/content/dam/jaspersoft/images/graphics/infographics/line-chart-example.svg" alt="" class="img-fluid"> -->
+
+                             <!-- vẽ biểu đồ -->
+                            <canvas id="myChart" width="400" height="200"></canvas> <!-- Biểu đồ nhiệt độ -->
+                        <!-- <button onclick="updateChart()">Cập Nhật Biểu Đồ</button>  -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="col-md-6 border border-dark">
+                        <p class="h3">Chất lượng nước <span id="tdsValue">Loading...</span> %</p>
+                        <div class="container">
+
+                            
+                            <!-- <img src="https://www.jaspersoft.com/content/dam/jaspersoft/images/graphics/infographics/line-chart-example.svg" alt="" class="img-fluid"> -->
+                            <canvas id="myChart1" width="400" height="200"></canvas> <!-- Biểu đồ nhiệt độ -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row text-center border m-0">
+                    <p class="h3 p-none m-none" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Điều khiển</p>
+                    <div class="collapse border" id="collapseWidthExample">
+                        <div class="row py-2">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-primary" onclick="toggleDevice('light1')">Bật đèn sưởi</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-primary" onclick="toggleDevice('light2')">Tắt đèn sưởi</button>
+                            </div>
+                        </div>
+                        <!-- <div class="row py-2">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-primary" onclick="toggleDevice('feedFish')">Cho cá ăn</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-primary" onclick="toggleDevice('heater')">Sưởi ấm</button>
+                            </div>
+                        </div> -->
+
+                        
+                        <button type="button" class="btn btn-primary" >Cho cá ăn</button>
+                         
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const ESP_URL = "http://192.168.116.63"; // Thay x bằng IP ESP8266 
+                
+                const labels = []; // Mảng lưu trữ nhãn thời gian
+                const data = []; // Mảng lưu trữ dữ liệu nhiệt độ
+                let myChart;
+
+                
+
+                // Hàm lấy nhiệt độ ESP8266
+                function fetchTemperatureData() {
+                    fetch(`${ESP_URL}/temperature`)
+                        .then(response => {
+                            if (!response.ok) throw new Error("Network response was not ok");
+                            return response.text();
+                        })
+                        .then(temp => {
+                            document.getElementById("temperature").innerText = temp;
+
+                            // Thêm dữ liệu vào mảng và nhãn thời gian
+                        const currentTime = new Date().toLocaleTimeString(); // Lấy thời gian hiện tại
+                        labels.push(currentTime);
+                        data.push(parseFloat(temp)); // Chuyển đổi nhiệt độ thành số thực
+                        
+                        // Giới hạn mảng tối đa 10 phần tử
+                        if (labels.length > 10) labels.shift(); // Xóa phần tử cũ nhất nếu vượt quá 10
+                        if (data.length > 10) data.shift();     // Xóa phần tử cũ nhất nếu vượt quá 10
+
+                        // Cập nhật biểu đồ
+                        updateChart();
+                        })
+                        .catch(error => console.error("Lỗi lấy dữ liệu nhiệt độ:", error));
+                }
+
+                // Hàm cập nhật biểu đồ
+                function updateChart() {
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    if (myChart) myChart.destroy(); // Hủy biểu đồ cũ nếu có
+
+                    myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Nhiệt độ (°C)',
+                                data: data,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                                fill: false // Không điền dưới biểu đồ
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 1 // Điều chỉnh giá trị này để giảm độ chia (thay đổi thành giá trị khác nếu cần)
+                                    }
+                                }
+                                
+                            }
+                        }
+                    });
+                }
+                // Gọi hàm fetchTemperatureData mỗi 5 giây
+                setInterval(fetchTemperatureData, 5000);
+
+
+
+
+                //Xử lý TDS
+                const labels1 = []; // Mảng lưu trữ nhãn thời gian
+                const data1 = []; // Mảng lưu trữ dữ liệu nhiệt độ
+                let myChart1;
+                // lấy dữ liệu TDS và vẽ biểu đồ
+                function fetchTDSData() {
+                    fetch(`${ESP_URL}/tds`)
+                        .then(response => {
+                            if (!response.ok) throw new Error("Network response was not ok");
+                            return response.text();
+                        })
+                        .then(tdsValue => {
+                            document.getElementById("tdsValue").innerText = `${tdsValue} ppm`;
+
+                            // Thêm dữ liệu vào mảng và nhãn thời gian
+                            const currentTime = new Date().toLocaleTimeString(); // Lấy thời gian hiện tại
+                            labels1.push(currentTime);
+                            data1.push(parseFloat(tdsValue)); // Chuyển đổi giá trị TDS thành số thực
+                            
+                            // Giới hạn mảng tối đa 10 phần tử
+                            if (labels1.length > 10) labels1.shift(); // Xóa phần tử cũ nhất nếu vượt quá 10
+                            if (data1.length > 10) data1.shift();     // Xóa phần tử cũ nhất nếu vượt quá 10
+
+
+                            // Cập nhật biểu đồ
+                            updateChart1();
+                        })
+                        .catch(error => console.error("Lỗi lấy dữ liệu TDS:", error));
+                }
+
+                // Hàm cập nhật biểu đồ
+                function updateChart1() {
+                    const ctx = document.getElementById('myChart1').getContext('2d');
+                    if (myChart1) myChart1.destroy(); // Hủy biểu đồ cũ nếu có
+
+                    myChart1 = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels1,
+                            datasets: [{
+                                label: 'TDS (ppm)',
+                                data: data1,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                                fill: false // Không điền dưới biểu đồ
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 50 // Điều chỉnh giá trị này để thay đổi độ chia trục y
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Gọi hàm fetchTDSData định kỳ để cập nhật dữ liệu TDS và biểu đồ
+                setInterval(fetchTDSData, 5000); // Cập nhật mỗi 5 giây
+
+                // Xử lý nút cho cá ăn
+                function toggleDevice(device) {
+                    fetch(`${ESP_URL}/${device === 'light1' ? 'on' : 'off'}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error("Network response was not ok");
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log(data); // Hiển thị phản hồi từ server trên console
+                        alert(data); // Hiển thị thông báo cho người dùng
+                    })
+                    .catch(error => console.error("Lỗi:", error));
+                }
+        
+                // Hàm điều khiển thiết bị (bật/tắt đèn, cho cá ăn, sưởi ấm)
+                // function toggleDevice(action) {
+                //     fetch(`${ESP_URL}/${action}`)
+                //         .then(response => response.text())
+                //         .then(data => console.log(data))
+                //         .catch(error => console.error("Lỗi điều khiển:", error));
+                // }
+                
+                
+            </script>
+        </main>
+        <footer>
+        </footer>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </body>
+</html>
